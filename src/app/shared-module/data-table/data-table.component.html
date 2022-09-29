@@ -1,0 +1,46 @@
+<div class="text-center table-responsive">
+    <table id="filterInDashboard" class="table table-hover table-striped table-sm">
+            <thead class="table-dark">
+                <tr class="dashboard-tr">
+                    <th *ngFor="let key of keyList">{{key}}
+                        <i class="ri-arrow-up-line cursor-pointer" (click)="onClickUpArrow(key)"></i>
+                        <i class="ri-arrow-down-line cursor-pointer" (click)="onClickDownArrow(key)"></i>
+                    </th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let values of valueList | paginate: { 
+                itemsPerPage: 5,
+                currentPage: currentPage,
+                totalItems: total}; let i = index">
+                <tr>
+                    <td [ngClass]="i%2!==0 ? 'table-color-odd' : 'table-color-even'" *ngFor="let val of values">{{val}}</td> 
+                    <td [ngClass]="i%2!==0 ? 'table-color-odd' : 'table-color-even'"><i class="ri-edit-box-line" (click)="onClickAction(values)"></i></td>
+                </tr>
+            </tbody>                               
+        </table>
+        <pagination-controls 
+        (pageChange)="currentPage = $event" 
+        [responsive]="true" 
+        >
+      </pagination-controls> 
+ </div>
+
+<!-- <table class="table table-responsive table-hover">
+    <tr>
+      <th class="pointer" (click)="sort('CategoryID')">Category ID</th>
+      <th class="pointer" (click)="sort('CategoryName')">Category</th>
+      <th class="pointer" (click)="sort('Description')">Description</th>
+    </tr>
+    <tbody *ngFor="let values of valueList; let i = index">
+        <tr>
+            <td [ngClass]="i%2!==0 ? 'table-color-odd' : 'table-color-even'" *ngFor="let val of values">{{val}}</td> 
+            <td [ngClass]="i%2!==0 ? 'table-color-odd' : 'table-color-even'"><i class="ri-edit-box-line" (click)="onClickAction(values)"></i></td>
+        </tr>
+    </tbody>  
+  </table>
+  <pagination-controls 
+        (pageChange)="currentPage = $event" 
+        [responsive]="true" 
+        >
+      </pagination-controls> -->
